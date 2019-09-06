@@ -5,11 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class stageManager : MonoBehaviour
 {
-    void OnCollisionEnter(Collision collision)
+
+    int a = 0;
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "fireball")
+        if (other.CompareTag("fireball"))
         {
-            SceneManager.LoadScene("Title");
+
+            if (a == 5)
+            {
+                SceneManager.LoadScene("Last");
+            }
+            a++;
+
         }
     }
 }

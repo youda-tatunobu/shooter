@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class player : MonoBehaviour
 {
@@ -10,8 +12,8 @@ public class player : MonoBehaviour
 
     int speed = 5;
     int count = 0;
-
     int tiam = 0;
+    public int a = 0;
 
     [SerializeField]
     GameObject ball = null;
@@ -25,13 +27,13 @@ public class player : MonoBehaviour
         {
 
         }
-            
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        Camera gameCamera = Camera.main;
+
         Vector3 move = transform.position;
 
         if (Input.GetMouseButton(0))
@@ -62,7 +64,7 @@ public class player : MonoBehaviour
 
         }
 
-        if(Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift))
         {
             speed = 3;
         }
@@ -81,12 +83,17 @@ public class player : MonoBehaviour
 
 
     }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("fireball"))
         {
-           
+
+            if (a == 5)
+            {
+                SceneManager.LoadScene("Last");
+            }
+            a++;
+
         }
     }
 

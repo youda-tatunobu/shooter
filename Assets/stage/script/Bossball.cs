@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bossball : MonoBehaviour
 {
     Rigidbody rb;
-    public int speed = 3;
+    float speed = 2f;
     int time = 0;
 
     // Start is called before the first frame update
@@ -19,10 +19,18 @@ public class Bossball : MonoBehaviour
     {
 
         time++;
-        if (time > 200)//600フレーム後に弾削除
+        if (time > 200)
         {
             transform.DetachChildren();//親オブジェクトから子オブジェクトを解除
             Destroy(gameObject);//弾削除
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            
+            Destroy(gameObject);
         }
     }
 }

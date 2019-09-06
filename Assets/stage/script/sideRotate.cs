@@ -12,9 +12,16 @@ public class sideRotate : MonoBehaviour
     [SerializeField]
     BossHP  main;
 
+    [SerializeField]
+    float ANGV = 90;
+
+    [SerializeField]
+    int count = 3;
+
+    float shootwait;
     float pos = 0.0f;
     int time = 300;
-    int count = 0;
+  
     float a = 1.0f;
     public int sideHP = 200;
     int Bonus=150;
@@ -28,6 +35,7 @@ public class sideRotate : MonoBehaviour
     void Start()
     {
         Vector3 move = transform.position;
+        shootwait = 1;
     }
 
     // Update is called once per frame
@@ -51,7 +59,7 @@ public class sideRotate : MonoBehaviour
     void DNMK0()
     {
 
-        if(stop!=0)
+        if(stop!=0||(count ==0))
         {
             
            
@@ -63,22 +71,19 @@ public class sideRotate : MonoBehaviour
             stop = 0;
             
             Vector3 move = transform.position;
-            if (count >= 4)
+            shootwait -= Time.deltaTime;
+            if (shootwait<=0)
             {
 
                 Instantiate(fireball, move, transform.rotation);
+                Instantiate(fireball, move, Quaternion.Euler(0,0,180)*transform.rotation);
 
-                count = 0;
+
+                shootwait += 1f / (float)count;
             }
-            count++;
-
-
-            pos += 0.5f;
-            transform.Rotate(new Vector3(0, 0, pos));
-            if (pos == 182)
-            {
-                pos *= -1;
-            }
+            
+            pos = Mathf.Repeat(pos + ANGV*Time.deltaTime, 360);
+            transform.rotation = Quaternion.Euler(0, 0, pos);
         }
         time--;
     }
@@ -86,11 +91,12 @@ public class sideRotate : MonoBehaviour
     void DNMK1()
     {
         time++;
-        if (time <= 100)
+        if (time <= 60)
         {
             sideHP = 200;
             pos = -120;
             count = 0;
+            Bonus = 1;
             return;
 
         }
@@ -101,6 +107,7 @@ public class sideRotate : MonoBehaviour
         {
 
             Instantiate(fireball, move, transform.rotation);
+            
 
 
             count = 0;
@@ -133,6 +140,7 @@ public class sideRotate : MonoBehaviour
             if(sideHP<=0|| main.Bosshp<=0)
             {
                 main.damege(Bonus);
+
                 stop=1;
 
                 
