@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Position : MonoBehaviour
 {
+   
+
     Rigidbody2D rb;
+    Canvas ca;
+    public static int a = 0;
 
 
     // Start is called before the first frame update
@@ -17,6 +21,12 @@ public class Position : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(a==1)
+        {
+            rb.transform.position = new Vector2(0, 20);
+            a = 0;
+            return;
+        }
         Vector2 mous = rb.transform.position;
         rb.transform.position = Input.mousePosition;
     }

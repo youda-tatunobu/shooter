@@ -18,26 +18,31 @@ public class player : MonoBehaviour
     [SerializeField]
     GameObject ball = null;
 
+    [SerializeField]
+    Position Imeage;
+
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-
-        }
 
     }
 
     // Update is called once per frame
-    void Update()
+  void Update()
     {
 
         Vector3 move = transform.position;
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0)||Input.GetButton("shoot_z"))
         {
+            if(Input.GetButton("shoot_z"))
+            {
+                Position.a=1;
+                
+
+            }
             if (tiam > 4)
             {
 
@@ -75,11 +80,17 @@ public class player : MonoBehaviour
         rb.velocity = move * speed;
         speed = 5;
 
+        if (Input.GetButton("shoot_z"))
+        {
+            return;
 
+
+        }
 
         var pos = Camera.main.WorldToScreenPoint(transform.localPosition);
         var rotation = Quaternion.LookRotation(Vector3.forward, Input.mousePosition - pos);
         transform.localRotation = rotation;
+
 
 
     }
