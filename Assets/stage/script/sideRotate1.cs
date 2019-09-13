@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class sideRotate : MonoBehaviour
+public class sideRotate1 : MonoBehaviour
 {
     [SerializeField]
     GameObject fireball = null;
@@ -76,7 +76,9 @@ public class sideRotate : MonoBehaviour
             {
 
                 Instantiate(fireball, move, transform.rotation);
-                Instantiate(fireball, move, Quaternion.Euler(0,0,180)*transform.rotation);
+                Instantiate(fireball, move, Quaternion.Euler(0, 0, 90) * transform.rotation);
+                Instantiate(fireball, move, Quaternion.Euler(0, 0, 180) * transform.rotation);
+                Instantiate(fireball, move, Quaternion.Euler(0, 0, 270) * transform.rotation);
 
 
                 shootwait += 1f / (float)count;
@@ -93,46 +95,46 @@ public class sideRotate : MonoBehaviour
         time++;
         if (time <= 60)
         {
-            sideHP = 200;
-            pos = -120;
-            count = 0;
+            sideHP = 80;
+            pos = -121;
+            count = 15;
             Bonus = 1;
+            ANGV = 50;
             return;
 
         }
-        Vector3 move = transform.position;
-
         stop = 0;
-        if (count >= 2)
+        Vector3 move = transform.position;
+        
+        shootwait -= Time.deltaTime;
+        if (shootwait <= 0)
         {
 
             Instantiate(fireball, move, transform.rotation);
-            
+            Instantiate(fireball, move, Quaternion.Euler(0, 0, 140) * transform.rotation);
+            Instantiate(fireball, move, Quaternion.Euler(0, 0, 280) * transform.rotation);
+            Instantiate(fireball, move, Quaternion.Euler(0, 0, 60) * transform.rotation);
+            Instantiate(fireball, move, Quaternion.Euler(0, 0, 220) * transform.rotation);
+            Instantiate(fireball, move, Quaternion.Euler(0, 0, 360) * transform.rotation);
 
 
-            count = 0;
-        }
-        count++;
-
-
-        pos += a;
-
-        transform.Rotate(new Vector3(0, 0, pos));
-        if (pos >= -140 || pos >= 140)
-        {
-            a *= -1;
+            shootwait += 1f / (float)count;
         }
 
+        pos = Mathf.Repeat(pos + ANGV * Time.deltaTime, 360);
+        transform.rotation = Quaternion.Euler(0, 0, pos);
 
 
     }
 
     private void OnTriggerEnter(Collider other)
     {
+
         if(sideHP<=0)
         {
             return;
         }
+
         if (other.CompareTag("ball"))
         {
             sideHP--;

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class bell : MonoBehaviour
 {
-    public int speed = 10;
+    [SerializeField]
+    int speed = 10;
+
     Rigidbody rb;
 
     int time = 0;
@@ -13,7 +15,11 @@ public class bell : MonoBehaviour
 
     void Start()
     {
-        
+        if(Input.GetButton("shoot_z"))
+        {
+            GetComponent<Rigidbody>().velocity = transform.up.normalized * speed;
+            return;
+        }
         var pos = Camera.main.WorldToScreenPoint(transform.localPosition);
         var rotation = Quaternion.LookRotation(Vector3.forward, Input.mousePosition - pos);
         transform.localRotation = rotation;
@@ -24,7 +30,7 @@ public class bell : MonoBehaviour
     void Update()
     {
         time++;
-        if (time > 200)//600フレーム後に弾削除
+        if (time > 250)//600フレーム後に弾削除
         {
             transform.DetachChildren();//親オブジェクトから子オブジェクトを解除
             Destroy(gameObject);//弾削除

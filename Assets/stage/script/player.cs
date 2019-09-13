@@ -10,9 +10,10 @@ public class player : MonoBehaviour
 
     Rigidbody rb;
 
-    int speed = 5;
+    float speed = 5;
     int count = 0;
     int tiam = 0;
+    int d = 0;
     public int a = 0;
 
     [SerializeField]
@@ -71,7 +72,7 @@ public class player : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            speed = 3;
+            speed = 3.5f;
         }
 
         move.x = Input.GetAxisRaw("Horizontal");
@@ -79,17 +80,6 @@ public class player : MonoBehaviour
         move.z = 0;
         rb.velocity = move * speed;
         speed = 5;
-
-        if (Input.GetButton("shoot_z"))
-        {
-            return;
-
-
-        }
-
-        var pos = Camera.main.WorldToScreenPoint(transform.localPosition);
-        var rotation = Quaternion.LookRotation(Vector3.forward, Input.mousePosition - pos);
-        transform.localRotation = rotation;
 
 
 

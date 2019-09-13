@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bossball : MonoBehaviour
 {
     Rigidbody rb;
-    float speed = 2f;
+    float speed = 4f;
     int time = 0;
 
     // Start is called before the first frame update
