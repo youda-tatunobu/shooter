@@ -19,6 +19,9 @@ public class player : MonoBehaviour
     GameObject ball = null;
 
     [SerializeField]
+    GameObject Lerp = null;
+
+    [SerializeField]
     Position Imeage;
 
 
@@ -45,7 +48,7 @@ public class player : MonoBehaviour
             }
             if (tiam > 4)
             {
-
+                Instantiate(Lerp, move, Quaternion.identity);
                 if (count == 0)
                 {
                     move.y = move.y + 0.4f;
@@ -101,9 +104,9 @@ public class player : MonoBehaviour
 
             if (a == 5)
             {
-                SceneManager.LoadScene("Last");
+                //SceneManager.LoadScene("Last");
             }
-            a++;
+            
 
         }
     }

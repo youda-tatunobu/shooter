@@ -16,7 +16,7 @@ public class stageManager : MonoBehaviour
             {
                 SceneManager.LoadScene("Last");
             }
-            a++;
+            //a++;
 
         }
     }
