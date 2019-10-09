@@ -48,7 +48,7 @@ public class player : MonoBehaviour
             }
             if (tiam > 4)
             {
-                Instantiate(Lerp, move, Quaternion.identity);
+                //Instantiate(Lerp, move, Quaternion.identity);
                 if (count == 0)
                 {
                     move.y = move.y + 0.4f;
